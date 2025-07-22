@@ -1,0 +1,145 @@
+<mvc:View xmlns:f="sap.f" controllerName="com.intel.fpr.zfprpocreate.controller.ChangeOrder"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns:tnt="sap.tnt"
+     xmlns:t="sap.ui.table"
+     xmlns:u="sap.ui.unified"
+     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:layout="sap.ui.layout"
+    xmlns="sap.m">
+    <f:DynamicPage id="page3" title="{i18n>title}" showFooter="true">
+                    <f:title>	
+                    <f:DynamicPageTitle> 
+                    <f:heading>
+                        <Title text="{i18n>PO/PR Create Change with ALV input}" />
+                    </f:heading>
+                    </f:DynamicPageTitle>
+                   </f:title>
+               <f:content>
+            <VBox>
+            <tnt:ToolHeader>                
+                    <Title text="{i18n>ChangeOrder}" />
+                    <ToolbarSpacer />
+                     <Button text="{i18n>BulkUpload}" press="onPressBulkUpload" />            
+            </tnt:ToolHeader> 
+    
+            <ScrollContainer horizontal="true" vertical="false"  height="auto">
+              <t:Table id="myTable1" rows="{lineItemsModel>/ChangeOrderData/items}" class="sapUiResponsiveMargin" selectionMode="Multi" width="100%">
+                        <t:columns>
+                            <t:Column width="8em">
+                                <Label text="{i18n>CRGrouping}" width="20em"/>
+                                <t:template>
+                                    <Input value="{lineItemsModel>CR Grouping}" placeholder="Enter CR Grouping" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="8em">
+                                <Label text="{i18n>WBSElement}"/>
+                                <t:template>
+                                <Input value="{lineItemsModel>WBS Element}" placeholder="WBSElement"/>
+                                </t:template>
+                            </t:Column>
+                             <t:Column width="10em">
+                                <Label text="{i18n>WBSElementDescription}" />
+                                <t:template>
+                                    <Text text="{lineItemsModel>WBS Element Description}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="8em">
+                                <Label text="{i18n>ProjectDefinition}" />
+                                <t:template>
+                                    <Text text="{lineItemsModel>Project Definition}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                               <Label text="{i18n>ChangeRequestType}" />
+                                <t:template>
+                                    <Select items="{path: 'dropDownModel>/Impact'}">
+								<core:Item key="{dropDownModel>key}" text="{dropDownModel>text}" />
+							</Select>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>ChangerequestTitle}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Change request Title}" placeholder="Enter Change Req Title"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="6em">
+                                <Label text="{i18n>Status}" />
+                                <t:template>
+                                    <Text text="{lineItemsModel>Status}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="6em">
+                                <Label text="{i18n>Impact}" />
+                                <t:template>
+                                    <Select items="{path: 'dropDownModel>/Impact'}">
+								<core:Item key="{dropDownModel>key}" text="{dropDownModel>text}" />
+							</Select>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="11em">
+                                <Label text="{i18n>ExistingPurchaseOrder}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Existing Purchase Order}" placeholder="Enter Existing Purchase Order"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>RefernceCR}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Refernce CR}" placeholder="Enter Ref CR" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>MaterialCommit}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Material Commit}" placeholder="Enter Material Commit" type="Number" liveChange="onValueChange"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>LaborCommit}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Labor Commit}" placeholder="Enter Labor Commit" type="Number" liveChange="onValueChange"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>EquipmentCommit}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Equipment Commit}" placeholder="Enter Equipment Commit" type="Number" liveChange="onValueChange"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="11em">
+                                <Label text="{i18n>ProposedTotalCommit}" />
+                                <t:template>
+                                    <Text text="{lineItemsModel>Proposed Total Commit}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>TransCurrency}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Trans Currency}" placeholder="Enter Trans Currency" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>ProposedCommit}" />
+                                <t:template>
+                                    <Text text="{lineItemsModel>Proposed Commit}" />
+                                </t:template>
+                            </t:Column>
+                        </t:columns>
+            </t:Table>
+            </ScrollContainer>
+      </VBox>
+    </f:content>
+      <f:footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="{i18n>Back}" press="onBackCOPress"/>
+                <Button text="{i18n>Next}" press="onPressCONext"/>
+            </Toolbar>
+        </f:footer>
+    </f:DynamicPage>  
+</mvc:View>

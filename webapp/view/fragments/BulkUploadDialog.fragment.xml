@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:unf="sap.ui.unified">
+    <Dialog id="bulkUploadDialog" title="{i18n>BulkUpload}" class="sapUiContentPadding" contentWidth="28em">
+
+        <content>
+            <HBox alignItems="Center">
+                    <Label text="{i18n>File}" showColon="true"/>
+                    <ToolbarSpacer width="1em"/>
+                    <unf:FileUploader id="massUploadFileUploader" name="myFileUpload" sameFilenameAllowed="true" sendXHR="true" useMultipart="false" change="onFileChange"/>
+            </HBox>
+        </content>
+        <buttons>
+            <Button icon="sap-icon://upload" text="{i18n>DownloadTemplate}" press="onDownloadTemplate" type="Emphasized" />
+            <Button icon="sap-icon://upload" text="{i18n>uploadButton}" press="onPressUpload" type="Emphasized" />
+            <Button text="{i18n>closeButton}" press="onCloseBulkUploadDialog" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

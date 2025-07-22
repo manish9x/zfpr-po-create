@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:unf="sap.ui.unified">
+    <Dialog  title="Attachment Upload" class="sapUiContentPadding" contentWidth="28em">
+
+        <content>
+            <HBox alignItems="Center">
+                    <Label text="{i18n>File}" showColon="true"/>
+                    <ToolbarSpacer width="1em"/>
+                    <unf:FileUploader name="myFileUpload" sameFilenameAllowed="true" sendXHR="true" useMultipart="false" change="onFileChange"/>
+            </HBox>
+        </content>
+        <buttons>
+            <Button icon="sap-icon://upload" text="{i18n>uploadButton}" press="onPressAttachUpload" type="Emphasized" />
+            <Button text="{i18n>CloseButton}" press="onCloseAttachUploadDialog" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

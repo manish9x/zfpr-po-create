@@ -1,0 +1,171 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "com.intel.fpr.zfprpocreate",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.18.0",
+      "toolsId": "d079136b-5157-40d1-9fe9-ccbd349ca687"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.136.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.intel.fpr.zfprpocreate.i18n.i18n"
+        }
+      },
+      "lineItemsModel": {
+        "type": "sap.ui.model.json.JSONModel"
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "com.intel.fpr.zfprpocreate.view",
+        "async": true,
+        "viewPath": "com.intel.fpr.zfprpocreate.view"
+      },
+      "routes": [
+        {
+          "name": "RouteCreate",
+          "pattern": ":?query:",
+          "target": [
+            "TargetCreate"
+          ]
+        },
+        {
+          "name": "TargetSelectProject",
+          "pattern": "SelectProject",
+          "target": [
+            "TargetSelectView"
+          ]
+        },
+        {
+          "name": "TargetChangeOrder",
+          "pattern": "ChangeOrder",
+          "target": [
+            "TargetChangeView"
+          ]
+        },
+        {
+          "name": "TargetPODetails",
+          "pattern": "PODetails",
+          "target": [
+            "TargetPODetailsView"
+          ]
+        },
+        {
+          "name": "TargetSelectApprover",
+          "pattern": "SelectApprover",
+          "target": [
+            "TargetSelectApproverView"
+          ]
+        },
+        {
+          "name": "TargetAttachment",
+          "pattern": "Attachment",
+          "target": [
+            "TargetAttachmentView"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetCreate": {
+          "id": "Create",
+          "name": "Create"
+        },
+        "TargetSelectView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "SelectProject",
+          "viewName": "SelectProject"
+        },
+        "TargetChangeView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ChangeOrder",
+          "viewName": "ChangeOrder"
+        },
+        "TargetPODetailsView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "PODetails",
+          "viewName": "PODetails"
+        },
+        "TargetSelectApproverView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "SelectApprover",
+          "viewName": "SelectApprover"
+        },
+        "TargetAttachmentView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Attachment",
+          "viewName": "Attachment"
+        }
+      }      
+    },
+    "rootView": {
+      "viewName": "com.intel.fpr.zfprpocreate.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

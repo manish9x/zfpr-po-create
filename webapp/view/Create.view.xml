@@ -1,0 +1,62 @@
+<mvc:View controllerName="com.intel.fpr.zfprpocreate.controller.Create"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:layout="sap.ui.layout"
+    xmlns:t="sap.ui.table"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <f:DynamicPage  id="page" showFooter="true">
+       <f:title>	
+                <f:DynamicPageTitle> 
+                <f:heading>
+                    <Title text="{i18n>PO/PR Create Change with ALV input}" />
+                </f:heading>            
+                </f:DynamicPageTitle>
+        </f:title>   
+        <f:content>
+                <VBox>
+                <Text text="{i18n>SelectBusinessUnit}"/>
+                <ToolbarSpacer/>
+               <Label text="{i18n>BusinessUnit}" labelFor="idComboBoxSuccess" class="sapUiTinyMarginTop"></Label>
+							<ComboBox selectionChange="onBusinessUnit" selectedKey="" items="{path: 'lineItemsModel>/createProjectData/businessUnit'}">
+								<core:Item key="{lineItemsModel>key}" text="{lineItemsModel>text}" />
+							</ComboBox>
+                <ToolbarSpacer/>
+                <t:Table id="idSelectProjectTable" rows="{lineItemsModel>/createProjectData/items}" selectionMode="Multi" width="100%"  rowSelectionChange="onRowSelect">
+                        <t:columns>
+                            <t:Column>
+                                <Label text="{i18n>SrNumber}" />
+                                <t:template>
+                                    <Text text="{lineItemsModel>SrNumber}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>ProjectDefinition}" />
+                                <t:template>
+                                    <Text text="{lineItemsModel>ProjectDefinition}" />
+                                </t:template>
+                            </t:Column>
+                             <t:Column>
+                                <Label text="{i18n>ProjectDefinitionDescription}" />
+                                <t:template>
+                                    <Text text="{lineItemsModel>ProjectDefinitionDescription}" />
+                                </t:template>
+                            </t:Column>
+                        </t:columns>
+                    </t:Table>
+                     </VBox>  
+                        </f:content> 
+        <f:footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="{i18n>Next}" press="onNextSPPress"/>
+            </Toolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

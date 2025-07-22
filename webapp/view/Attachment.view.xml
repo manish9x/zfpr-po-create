@@ -1,0 +1,43 @@
+<mvc:View controllerName="com.intel.fpr.zfprpocreate.controller.Attachment"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:tnt="sap.tnt"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table"
+    xmlns="sap.m">
+    <Page id="page6" title="{i18n>title}">
+           <content>
+
+                  <tnt:ToolHeader>
+                    <Title text="Attachments"/>
+                    <ToolbarSpacer />
+                     <Button text="Upload" press="onPressUpload" />
+                </tnt:ToolHeader>
+                <Table items="{lineItemsModel>/SelectAttachmentData/items}" width="auto">
+        <columns>
+            <Column mergeDuplicates="true"><Label text="CR" /></Column>
+            <Column><Label text="Name" /></Column>
+            <Column><Label text="URL" /></Column>
+            
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{lineItemsModel>CR}" />
+                    <Text text="{lineItemsModel>Name}" />
+                    <Link text="{lineItemsModel>URL}" target="_blank" href="http://www.sap.com"/>
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+          </content>
+          <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="{i18n>Back}" press="onPressBackSelectApprover"/>
+                <Button text="{i18n>Save}" press="onPressSaveSelectApprover"/>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

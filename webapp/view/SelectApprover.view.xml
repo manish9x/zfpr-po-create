@@ -1,0 +1,42 @@
+<mvc:View xmlns:tnt="sap.tnt" controllerName="com.intel.fpr.zfprpocreate.controller.SelectApprover"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+     xmlns:table="sap.ui.table"
+    xmlns="sap.m">
+    <Page id="page5" title="{i18n>title}" showFooter="true">
+           <content>
+
+                <tnt:ToolHeader>
+                    <Title text="{i18n>SelectApprovers}"/>
+                </tnt:ToolHeader>
+            
+                <Table items="{lineItemsModel>/SelectApproverData/items}" width="auto">
+                 <columns>
+                     <Column mergeDuplicates="true"><Label text="{i18n>CR}" /></Column>
+                     <Column><Label text="{i18n>ApproverType}" /></Column>
+                     <Column><Label text="{i18n>ApproverRole}" /></Column>
+            
+                  </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{lineItemsModel>CR}" />
+                    <Text text="{lineItemsModel>Approver Type}" />
+                    <Text text="{lineItemsModel>ApproverRole}" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+          </content> 
+
+          <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="{i18n>Back}" press="onPressBackSelectApprover"/>
+                <Button text="{i18n>Save}" press="onPressSaveSelectApprover"/>
+            </Toolbar>
+        </footer> 
+    </Page>
+</mvc:View>

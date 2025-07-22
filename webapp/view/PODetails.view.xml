@@ -1,0 +1,146 @@
+<mvc:View controllerName="com.intel.fpr.zfprpocreate.controller.PODetails"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns:tnt="sap.tnt"
+     xmlns:t="sap.ui.table"
+     xmlns:u="sap.ui.unified"
+     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:layout="sap.ui.layout"
+    xmlns="sap.m">
+    <f:DynamicPage id="page4" title="{i18n>title}" showFooter="true">
+             <f:title>	
+                    <f:DynamicPageTitle> 
+                    <f:heading>
+                        <Title text="{i18n>PO/PR Create Change with ALV input}" />
+                    </f:heading>
+                    </f:DynamicPageTitle>
+                   </f:title>
+              <f:content>
+                <VBox>
+                 <tnt:ToolHeader>
+                    <Title text="{i18n>PODetails}"/>
+                </tnt:ToolHeader>
+   
+    <ScrollContainer horizontal="true" vertical="false"  height="auto">
+              <t:Table id="myTable2" rows="{lineItemsModel>/PODetailsData/items}" class="sapUiResponsiveMargin" selectionMode="Multi" width="100%">
+                        <t:columns>
+                            <t:Column>
+                                <Label text="{i18n>CR}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>CR}" placeholder="Enter CR"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>DocType}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Doc Type}" placeholder="Enter Doc Type" />
+                                </t:template>
+                            </t:Column>
+                             <t:Column>
+                                <Label text="{i18n>SupplierID}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Supplier ID}" placeholder="Enter Supplier ID"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>Plant}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Plant}" placeholder="Enter Plant"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>Currency}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Currency}" placeholder="Enter Currency"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>PurchasingGroup}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Purchasing Group}" placeholder="Enter Purchasing Group"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>CompanyCode}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Company Code}" placeholder="Enter Company Code"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>PurchaseOrg}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Purchase Org}" placeholder="Enter Purchase Org"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>Currency}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Currency}" placeholder="Enter Currency"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>StorageLocation}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Storage Location}" placeholder="Enter Storage Location"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>ItemCategory}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Item Category}" placeholder="Enter Item Category" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>AAC}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>AAC}" placeholder="Enter AAC"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>Limit}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Limit}" placeholder="Enter Limit"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>OverallLimit}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Overall Limit}" placeholder="Enter Overall Limit"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>MaterialGroup}}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>Material Group}" placeholder="Enter Material Group"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>AAC}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>AAC}" placeholder="Enter AAC"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>GL}" />
+                                <t:template>
+                                    <Input value="{lineItemsModel>GL}" placeholder="Enter GL"/>
+                                </t:template>
+                            </t:Column>
+                        </t:columns>
+            </t:Table>
+            </ScrollContainer>
+    </VBox>
+          </f:content>
+          <f:footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="{i18n>Back}" press="onPressBackPODetails"/>
+                <Button text="{i18n>Next}" press="onPressNextPODetails"/>
+            </Toolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>
