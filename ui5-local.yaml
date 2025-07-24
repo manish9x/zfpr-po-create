@@ -29,3 +29,21 @@ server:
       afterMiddleware: compression
       configuration:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        backend:
+          - url: http://devb1.intel.com:8443
+            client: '250'
+            authenticationType: PrincipalPropagation
+            destination: BI1250BAS
+            path: /sap
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        mountPath: /
+        services:
+          - urlPath: /sap/opu/odata/sap/ZUI2_FPR_PROJECT_CHG_ORD
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+        annotations:
+          - localPath: ./webapp/localService/mainService/ZUI2_FPR_PROJECT_CHG_ORD_VAN.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI2_FPR_PROJECT_CHG_ORD_VAN',Version='0001')/$value/
