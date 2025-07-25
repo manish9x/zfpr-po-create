@@ -2,8 +2,9 @@
     controllerName="com.intel.fpr.zfprpocreate.controller.Create"
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
-    xmlns:layout="sap.ui.layout"
+    xmlns:l="sap.ui.layout"
     xmlns:t="sap.ui.table"
+    xmlns:tnt="sap.tnt"
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:smartField="sap.ui.comp.smartfield"
@@ -28,54 +29,224 @@
             <VBox>
                 <!-- <Text text="{i18n>SelectBusinessUnit}" />
                 <ToolbarSpacer /> -->
-                <Label
-                    text="{i18n>BusinessUnit}"
-                    labelFor="idComboBoxSuccess"
-                    class="sapUiTinyMarginTop"
-                />
-                <ComboBox
-                    selectionChange="onBusinessUnit"
-                    selectedKey="{Common>/SelectedBU}"
-                    items="{path: '/ZCDS_R_FPR_VHBUS_UNIT'}"
-                >
-                    <core:Item
-                        key="{BusinessUnit}"
-                        text="{BusinessUnit}"
+                <HBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label
+                            text="{i18n>BusinessUnit}"
+                            labelFor="idComboBoxSuccess"
+                        />
+                        <ComboBox
+                            selectionChange="onBusinessUnit"
+                            selectedKey="{Common>/SelectedBU}"
+                            items="{path: '/ZCDS_R_FPR_VHBUS_UNIT'}"
+                        >
+                            <core:Item
+                                key="{BusinessUnit}"
+                                text="{BusinessUnit}"
+                            />
+                        </ComboBox>
+                    </VBox>
+                    <ToolbarSpacer />
+                    <l:VerticalLayout width="100%">
+                        <Label
+                            text="Project Definition"
+                            width="100%"
+                            labelFor="multiInput"
+                        />
+                        <MultiInput
+                            width="100%"
+                            id="multiInput"
+                            suggestionItems="{
+				path: '/ProductCollection',
+				sorter: { path: 'Name' }
+			}"
+                            valueHelpRequest="onVHRequestedProjectDefinition"
+                        >
+                            <core:Item
+                                key="{ProductId}"
+                                text="{Name}"
+                            />
+                        </MultiInput>
+                    </l:VerticalLayout>
+                </HBox>
+                <tnt:ToolHeader>
+                    <Title text="{i18n>ChangeOrder}" />
+                    <ToolbarSpacer />
+                    <Button
+                        text="{i18n>BulkUpload}"
+                        press="onPressBulkUpload"
                     />
-                </ComboBox>
+                </tnt:ToolHeader>
                 <ToolbarSpacer />
-                <t:Table
-                    id="idSelectProjectTable"
-                    rows="{/ZCDS_R_FPR_VHPROJ_DEFINATION}"
-                    selectionMode="Multi"
-                    width="100%"
-                    rowSelectionChange="onRowSelect"
+                <ScrollContainer
+                    horizontal="true"
+                    vertical="false"
+                    height="auto"
                 >
-                    <t:columns>
-                        <!-- <t:Column>
-                            <Label text="{i18n>SrNumber}" />
-                            <t:template>
-                                <Text text="{lineItemsModel>SrNumber}" />
-                            </t:template>
-                        </t:Column> -->
-                        <t:Column>
-                            <Label text="{i18n>ProjectDefinition}" />
-                            <t:template>
-                                <Text
-                                    text="{ProjectDefinition}"
+                    <t:Table
+                        id="myTable1"
+                        rows="{lineItemsModel>/ChangeOrderData/items}"
+                        selectionMode="Multi"
+                        width="100%"
+                    >
+                        <t:columns>
+                            <t:Column width="8em">
+                                <Label
+                                    text="{i18n>CRGrouping}"
+                                    width="20em"
                                 />
-                            </t:template>
-                        </t:Column>
-                        <t:Column>
-                            <Label text="{i18n>ProjectDefinitionDescription}" />
-                            <t:template>
-                                <Text
-                                    text="{ProjectDefinitionDescription}"
-                                />
-                            </t:template>
-                        </t:Column>
-                    </t:columns>
-                </t:Table>
+                                <t:template>
+                                    <Input
+                                        value="{lineItemsModel>CR Grouping}"
+                                        placeholder="Enter CR Grouping"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="8em">
+                                <Label text="{i18n>WBSElement}" />
+                                <t:template>
+                                    <Input
+                                        value="{lineItemsModel>WBS Element}"
+                                        placeholder="WBSElement"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="10em">
+                                <Label text="{i18n>WBSElementDescription}" />
+                                <t:template>
+                                    <Text
+                                        text="{lineItemsModel>WBS Element Description}"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="8em">
+                                <Label text="{i18n>ProjectDefinition}" />
+                                <t:template>
+                                    <Text
+                                        text="{lineItemsModel>Project Definition}"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>ChangeRequestType}" />
+                                <t:template>
+                                    <Select
+                                        items="{path: 'dropDownModel>/Impact'}"
+                                    >
+                                        <core:Item
+                                            key="{dropDownModel>key}"
+                                            text="{dropDownModel>text}"
+                                        />
+                                    </Select>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>ChangerequestTitle}" />
+                                <t:template>
+                                    <Input
+                                        value="{lineItemsModel>Change request Title}"
+                                        placeholder="Enter Change Req Title"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="6em">
+                                <Label text="{i18n>Status}" />
+                                <t:template>
+                                    <Text text="{lineItemsModel>Status}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="6em">
+                                <Label text="{i18n>Impact}" />
+                                <t:template>
+                                    <Select
+                                        items="{path: 'dropDownModel>/Impact'}"
+                                    >
+                                        <core:Item
+                                            key="{dropDownModel>key}"
+                                            text="{dropDownModel>text}"
+                                        />
+                                    </Select>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="11em">
+                                <Label text="{i18n>ExistingPurchaseOrder}" />
+                                <t:template>
+                                    <Input
+                                        value="{lineItemsModel>Existing Purchase Order}"
+                                        placeholder="Enter Existing Purchase Order"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>RefernceCR}" />
+                                <t:template>
+                                    <Input
+                                        value="{lineItemsModel>Refernce CR}"
+                                        placeholder="Enter Ref CR"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>MaterialCommit}" />
+                                <t:template>
+                                    <Input
+                                        value="{lineItemsModel>Material Commit}"
+                                        placeholder="Enter Material Commit"
+                                        type="Number"
+                                        liveChange="onValueChange"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>LaborCommit}" />
+                                <t:template>
+                                    <Input
+                                        value="{lineItemsModel>Labor Commit}"
+                                        placeholder="Enter Labor Commit"
+                                        type="Number"
+                                        liveChange="onValueChange"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>EquipmentCommit}" />
+                                <t:template>
+                                    <Input
+                                        value="{lineItemsModel>Equipment Commit}"
+                                        placeholder="Enter Equipment Commit"
+                                        type="Number"
+                                        liveChange="onValueChange"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="11em">
+                                <Label text="{i18n>ProposedTotalCommit}" />
+                                <t:template>
+                                    <Text
+                                        text="{lineItemsModel>Proposed Total Commit}"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>TransCurrency}" />
+                                <t:template>
+                                    <Input
+                                        value="{lineItemsModel>Trans Currency}"
+                                        placeholder="Enter Trans Currency"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="9em">
+                                <Label text="{i18n>ProposedCommit}" />
+                                <t:template>
+                                    <Text
+                                        text="{lineItemsModel>Proposed Commit}"
+                                    />
+                                </t:template>
+                            </t:Column>
+                        </t:columns>
+                    </t:Table>
+                </ScrollContainer>
             </VBox>
         </f:content>
         <f:footer>

@@ -27,7 +27,7 @@
             </tnt:ToolHeader> 
     
             <ScrollContainer horizontal="true" vertical="false"  height="auto">
-              <t:Table id="myTable1" rows="{lineItemsModel>/ChangeOrderData/items}" class="sapUiResponsiveMargin" selectionMode="Multi" width="100%">
+              <t:Table id="myTable3" rows="{lineItemsModel>/ChangeOrderData/items}" class="sapUiResponsiveMargin" selectionMode="Multi" width="100%">
                         <t:columns>
                             <t:Column width="8em">
                                 <Label text="{i18n>CRGrouping}" width="20em"/>
@@ -130,7 +130,7 @@
                                 </t:template>
                             </t:Column>
                         </t:columns>
-            </t:Table>
+              </t:Table>
             </ScrollContainer>
       </VBox>
     </f:content>

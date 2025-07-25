@@ -1,0 +1,39 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+>
+    <TableSelectDialog
+        id="IdDepartmentIdInput"
+        title="{i18n>Select} {i18n>Project Definition}"
+        search=".handleVHProjectDefinitionSearch"
+        confirm=".onProjectDefinitionVHSelected"
+        cancel=".handleValueHelpClose"
+        items="{ path : '/ZCDS_R_FPR_VHPROJ_DEFINATION'}"
+        searchPlaceholder=""
+        growingThreshold="40"
+        multiSelect="true"
+    >
+        <ColumnListItem>
+            <cells>
+                <Text text="{ProjectDefinition}" />
+                <Text text="{ProjectDefinitionDescription}" />
+               
+            </cells>
+        </ColumnListItem>
+        <columns>
+            <Column>
+                <header>
+                    <Text text="Project Definition" />
+                </header>
+            </Column>
+            <Column>
+                <header>
+                    <Text text="Project Definition Description" />
+                </header>
+            </Column>
+           
+        </columns>
+    </TableSelectDialog>
+</core:FragmentDefinition>
