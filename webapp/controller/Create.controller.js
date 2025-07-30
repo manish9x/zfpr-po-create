@@ -1,8 +1,10 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageBox"
-], (Controller, JSONModel, MessageBox) => {
+    "sap/m/MessageBox",
+    "sap/m/MessageToast",
+
+], (Controller, JSONModel, MessageBox, MessageToast) => {
     "use strict";
 
     return Controller.extend("com.intel.fpr.zfprpocreate.controller.Create", {
@@ -166,8 +168,58 @@ sap.ui.define([
                 });
         },
 
-        //Value Help for Department ID
-        onVHRequestedProjectDefinition(oEvent) {
+
+        onAddRowPress: function(){
+            var oModel = this.getView().getModel("lineItemsModel");
+            var aItems = oModel.getProperty("/ChangeOrderData/items");
+            
+            // Add a new row
+            aItems.push({ "CR_Grouping": "",
+                            "WBS_Element": "",
+                            "WBS Element Description": "",
+                            "Project Definition": "",
+                            "Change Request Type": "",
+                            "Change Request Title": "",
+                            "Status": "",
+                            "Impact": "",
+                            "Existing Purchase Order": "",
+                            "Refernce CR": "",
+                            "Material Commit": 0,
+                            "Labor Commit": 0,
+                            "Equipment Commit": 0,
+                            "Proposed Total Commit": "",
+                            "Trans Currency": "",
+                            "Proposed Commit": ""});
+
+            // Update the model
+            oModel.setProperty("/ChangeOrderData/items", aItems);
+            MessageToast.show("New row added.");
+        },
+
+        onDeleteRowPress: function(oEvent) {
+            // Get the table and model
+            var oTable = this.byId("myTable1");
+            var oModel = this.getView().getModel("lineItemsModel");
+         
+            // Get the selected index
+            var iSelectedIndex = oTable.getSelectedIndex();
+            if (iSelectedIndex > -1) {
+                var oContext = oTable.getContextByIndex(iSelectedIndex);
+                var sPath = oContext.getPath(); 
+                var aItems = oModel.getProperty("/ChangeOrderData/items");
+                var iIndex = parseInt(sPath.split("/").pop(), 10);
+                aItems.splice(iIndex, 1);
+                oModel.setProperty("/ChangeOrderData/items", aItems);
+                oTable.clearSelection();
+                MessageToast.show("Row deleted.");
+            } else {
+                MessageToast.show("Please select a row to delete.");
+            }
+        },
+
+
+        //Value Help for Project Definition
+        onVHRequestedProjectDefinition: function(oEvent) {
             var that = this;
             if (!this.f4DepartmentIdFrag) {
                 this.f4DepartmentIdFrag = sap.ui.xmlfragment(this.getView().createId("idF4MPMFamilyHelpList"), "com.intel.fpr.zfprpocreate.view.fragments.ProjectDefinition", this);
@@ -177,7 +229,7 @@ sap.ui.define([
             this.f4DepartmentIdFrag.open();
         },
 
-        //Method to search  Department ID
+        //Method to search  Project Definition
         handleVHProjectDefinitionSearch: function (oEvent) {
             var sValue = oEvent.getParameter("value");
             var oFilter = new sap.ui.model.Filter("DepartmentId", sap.ui.model.FilterOperator.Contains, sValue);
@@ -186,7 +238,7 @@ sap.ui.define([
         },
 
         /**                               
-         * Method triggered when Department ID is selected from F4 Fragment.
+         * Method triggered when Project Definition is selected from F4 Fragment.
          * @public
          * @param {oEvent}
          */
@@ -196,6 +248,65 @@ sap.ui.define([
             // this.checkExecuteBtnEnabled();   
         },
 
+        //Value Help for WBS Element
+        onVHWBSElementId: function(oEvent) {
+            var that = this;
+            if (!this.f4DepartmentIdFrag) {
+                this.f4DepartmentIdFrag = sap.ui.xmlfragment(this.getView().createId("idF4MPMFamilyHelpList"), "com.intel.fpr.zfprpocreate.view.fragments.WBSElement", this);
+                this.f4DepartmentIdFrag.addStyleClass("sapUiSizeCompact");
+                this.getView().addDependent(this.f4DepartmentIdFrag);
+            }
+            this.f4DepartmentIdFrag.open();
+        },
+
+        //Method to search  Existing Purchase Order
+        handleVHBSElementSearch: function (oEvent) {
+            var sValue = oEvent.getParameter("value");
+            var oFilter = new sap.ui.model.Filter("DepartmentId", sap.ui.model.FilterOperator.Contains, sValue);
+            var oBinding = oEvent.getParameter("itemsBinding");
+            oBinding.filter([oFilter]);
+        },
+
+        /**                               
+         * Method triggered when  Existing Purchase Order is selected from F4 Fragment.
+         * @public
+         * @param {oEvent}
+         */
+        onWBSElementIdVHSelected: function (oEvent) {
+            var oObjectSelected = oEvent.getParameter("selectedItem").getBindingContext().getObject();
+            this.getView().getModel("UITPRModel").setProperty("/DepartmentId", oObjectSelected.DepartmentId);
+            // this.checkExecuteBtnEnabled();   
+        },
+
+        //Value Help for  Existing Purchase Order
+        onVHExistPODefinition(oEvent) {
+            var that = this;
+            if (!this.f4DepartmentIdFrag) {
+                this.f4DepartmentIdFrag = sap.ui.xmlfragment(this.getView().createId("idF4MPMFamilyHelpList"), "com.intel.fpr.zfprpocreate.view.fragments.ExistPurchaseOrder", this);
+                this.f4DepartmentIdFrag.addStyleClass("sapUiSizeCompact");
+                this.getView().addDependent(this.f4DepartmentIdFrag);
+            }
+            this.f4DepartmentIdFrag.open();
+        },
+
+        //Method to search   Existing Purchase Order
+        handleVHExistPOSearch: function (oEvent) {
+            var sValue = oEvent.getParameter("value");
+            var oFilter = new sap.ui.model.Filter("DepartmentId", sap.ui.model.FilterOperator.Contains, sValue);
+            var oBinding = oEvent.getParameter("itemsBinding");
+            oBinding.filter([oFilter]);
+        },
+
+        /**                               
+         * Method triggered when Project Definition is selected from F4 Fragment.
+         * @public
+         * @param {oEvent}
+         */
+        onExistPOVHSelected: function (oEvent) {
+            var oObjectSelected = oEvent.getParameter("selectedItem").getBindingContext().getObject();
+            this.getView().getModel("UITPRModel").setProperty("/DepartmentId", oObjectSelected.DepartmentId);
+            // this.checkExecuteBtnEnabled();   
+        },
 
         initializeData2: function () {
             var dropDown = {

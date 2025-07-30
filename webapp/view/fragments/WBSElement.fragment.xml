@@ -5,32 +5,31 @@
     xmlns:layout="sap.ui.layout"
 >
     <TableSelectDialog
-        id="IdDepartmentIdInput"
-        title="{i18n>Select} {i18n>ProjectDefinition}"
-        search=".handleVHProjectDefinitionSearch"
-        confirm=".onProjectDefinitionVHSelected"
+        title="{i18n>Select} {i18n>WBSElement}"
+        search=".handleVHBSElementSearch"
+        confirm=".onWBSElementIdVHSelected"
         cancel=".handleValueHelpClose"
-        items="{ path : '/ZCDS_R_FPR_VHPROJ_DEFINATION'}"
+        items="{ path : '/ZCDS_R_FPR_VHWBSELEMENT'}"
         searchPlaceholder=""
         growingThreshold="40"
         multiSelect="true"
     >
         <ColumnListItem>
             <cells>
-                <Text text="{ProjectDefinition}" />
-                <Text text="{ProjectDefinitionDescription}" />
+                <Text text="{WBSElement}" />
+                <Text text="{WBSDescription}" />
                
             </cells>
         </ColumnListItem>
         <columns>
             <Column>
                 <header>
-                    <Text text="Project Definition" />
+                    <Text text="WBS Element" />
                 </header>
             </Column>
             <Column>
                 <header>
-                    <Text text="Project Definition Description" />
+                    <Text text="WBS Description" />
                 </header>
             </Column>
            

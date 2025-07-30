@@ -73,6 +73,16 @@
                     <Title text="{i18n>ChangeOrder}" />
                     <ToolbarSpacer />
                     <Button
+                        text="Add Row"
+                        icon="sap-icon://add"
+                        press="onAddRowPress"
+                    />
+                    <Button
+                        text="Delete Row"
+                        icon="sap-icon://delete"
+                        press="onDeleteRowPress"
+                    />
+                    <Button
                         text="{i18n>BulkUpload}"
                         press="onPressBulkUpload"
                     />
@@ -103,12 +113,27 @@
                                 </t:template>
                             </t:Column>
                             <t:Column width="8em">
-                                <Label text="{i18n>WBSElement}" />
+                                <Label
+                                    showColon="true"
+                                    text="{i18n>WBSElement}"
+                                />
                                 <t:template>
                                     <Input
-                                        value="{lineItemsModel>WBS Element}"
-                                        placeholder="WBSElement"
-                                    />
+                                        placeholder="{i18n>Enter} {i18n>WBSElement}"
+                                        showSuggestion="true"
+                                        suggestionItems="{/ZCDS_I_FPR_TPR_DEPID_VH}"
+                                        suggestionItemSelected=".onWBSElementIdVHSelected"
+                                        value="{lineItemsModel>/WBSElement}"
+                                        showValueHelp="true"
+                                        valueHelpRequest="onVHWBSElementId"
+                                        class="sapUiTinyMarginTop"
+                                    >
+                                        <suggestionItems>
+                                            <SuggestionItem
+                                                text="{lineItemsModel>WBSElement}"
+                                            />
+                                        </suggestionItems>
+                                    </Input>
                                 </t:template>
                             </t:Column>
                             <t:Column width="10em">
@@ -168,15 +193,32 @@
                                     </Select>
                                 </t:template>
                             </t:Column>
-                            <t:Column width="11em">
-                                <Label text="{i18n>ExistingPurchaseOrder}" />
+
+                            <t:Column width="8em">
+                                <Label
+                                    showColon="true"
+                                    text="{i18n>ExistingPurchaseOrder}"
+                                />
                                 <t:template>
                                     <Input
-                                        value="{lineItemsModel>Existing Purchase Order}"
-                                        placeholder="Enter Existing Purchase Order"
-                                    />
+                                        placeholder="{i18n>Enter} {i18n>ExistingPurchaseOrder}"
+                                        showSuggestion="true"
+                                        suggestionItems="{/ZCDS_I_FPR_TPR_DEPID_VH}"
+                                        suggestionItemSelected=".onExistPOVHSelected"
+                                        value="{lineItemsModel>/ExistPO}"
+                                        showValueHelp="true"
+                                        valueHelpRequest="onVHExistPODefinition"
+                                        class="sapUiTinyMarginTop"
+                                    >
+                                        <suggestionItems>
+                                            <SuggestionItem
+                                                text="{lineItemsModel>ExistPO}"
+                                            />
+                                        </suggestionItems>
+                                    </Input>
                                 </t:template>
                             </t:Column>
+
                             <t:Column width="9em">
                                 <Label text="{i18n>RefernceCR}" />
                                 <t:template>
